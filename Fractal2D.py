@@ -1,3 +1,5 @@
+import numpy as np
+
 class Fractal2D:
     
-    pass
+    zeroes = np.array([])
