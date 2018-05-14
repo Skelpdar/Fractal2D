@@ -15,9 +15,12 @@ class Fractal2D:
 		#Should return the coordinate of the root and the number of iterations it took
 		#return None on failure to find root?	
 		for n in range (self.maxIterations):
-			p = np.linalg.solve(self.derivative(p), -self.function(p)) + p
-			if np.linalg.norm(self.function(p)) < self.tolerance:
-				return (p,n)
+			try:
+				p = np.linalg.solve(self.derivative(p), -self.function(p)) + p
+				if np.linalg.norm(self.function(p)) < self.tolerance:
+					return (p,n)
+			except:
+				return None
 		return None
 	
 
