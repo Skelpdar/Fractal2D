@@ -2,7 +2,8 @@ import numpy as np
 
 class Fractal2D:
 	
-	zeroes = np.array([])
+	zeroes = []
+	colours = []
 
 	def __init__(self, function, derivative = None, maxIterations = 100, tolerance = 10E-4):
 		self.function = function
@@ -20,9 +21,17 @@ class Fractal2D:
 		return None
 	
 
-	def findZeroes(self, root, tolerance):
+	def findRootIndex(self, root):
 		#Should return the index in 'zeroes' of the root, or an already present one within the given tolerance
-		pass
+		
+		#Check if the difference to some existing root is smaller than the tolerance
+		for index in range(len(self.zeroes)):
+			if np.linalg.norm((self.zeroes[index] - root)) < self.tolerance:
+				return index
+		#If not, add a new root
+		else:
+			self.zeroes.append(root)
+			return len(self.zeroes)-1	
 
 	def plot():
 		pass
