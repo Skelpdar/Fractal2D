@@ -1,4 +1,5 @@
 import numpy as np
+from sympy import symbols, diff, Array
 
 class Fractal2D:
 	
@@ -10,7 +11,18 @@ class Fractal2D:
 		self.derivative = derivative
 		self.maxIterations = maxIterations
 		self.tolerance = tolerance
-	
+
+#How a functioned could be written in order for automated derivation to work.
+#def f(x,y):
+#   return Array([[x**3-3*x*y**2-1],[3*x**2*y-y**2]])	
+	def automatedDeriv(self):
+		x, y = symbols('x y')        
+		a = f1_derivative_x = diff(self.function[0],x)  
+		b = f1_derivative_y = diff(self.function[0],y)
+		c = f2_derivative_x = diff(self.function[1],x) 
+		d = f2_derivative_y = diff(self.function[1],y)		 
+		return np.array([[a,b],[c,d]])
+    
 	def newton(self, p):
 		#Should return the coordinate of the root and the number of iterations it took
 		#return None on failure to find root?	
