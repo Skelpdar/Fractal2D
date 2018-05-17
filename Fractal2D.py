@@ -38,7 +38,7 @@ class Fractal2D:
 
 	def getColor(self, p):
 		root = self.newton(p)
-		c = [1,3/4,2/4,1/4]
+		c = [4/5,3/5,3/5,1/5]
 		if root == None:
 			return np.array([1,1,1])
 		else:
