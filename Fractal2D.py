@@ -36,8 +36,27 @@ class Fractal2D:
 			self.zeroes.append(root)
 			return len(self.zeroes)-1	
 
-	def plot():
-		pass
+	def getColor(self, p):
+		root = self.newton(p)
+		c = [1,3/4,2/4,1/4]
+		if root == None:
+			return np.array([1,1,1])
+		else:
+			index = self.findRootIndex(root[0])
+			return np.array([c[index],0,0])
+	
+	def plot(self, dim, N):
+		im = np.zeros([N,N,3])
+
+		x = np.linspace(-dim,dim,N)
+		y = np.linspace(-dim,dim,N)
+
+		for ny in range(N):
+			for nx in range(N):
+				im[ny][nx] = self.getColor(np.array([x[nx],y[ny]]))
+		
+		plt.imshow(im, origin = 'lower')
+		
 	
 	def simplifiedNewton(self, p):
 		#Newtons method but with numericalDerivativ
