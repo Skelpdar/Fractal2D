@@ -75,7 +75,22 @@ class Fractal2D:
 		pass
 
 	def numericalDerivative(self, p, stepDistance):
-		pass
+		#The function needs to have two inputs for this to work.        
+		h = stepDistance
+		f1x_ad_h = self.function(p[0]+h,p[1])[0]
+		f1x_sub_h = self.function(p[0]-h,p[1])[0]
+		f1y_ad_h = self.function(p[0],p[1]+h)[0]
+		f1y_sub_h = self.function(p[0],p[1]-h)[0]
+		f1_derivative_x = (f1x_ad_h-f1x_sub_h)/(2*h) 
+		f1_derivative_y = (f1y_ad_h-f1y_sub_h)/(2*h)   
+		
+		f2x_ad_h = self.function(p[0]+h,p[1])[1]
+		f2x_sub_h = self.function(p[0]-h,p[1])[1]
+		f2y_ad_h = self.function(p[0],p[1]+h)[1]
+		f2y_sub_h = self.function(p[0],p[1]-h)[1]
+		f2_derivative_x = (f2x_ad_h-f2x_sub_h)/(2*h) 
+		f2_derivative_y = (f2y_ad_h-f2y_sub_h)/(2*h)
+		return np.array([[f1_derivative_x,f1_derivative_y],[f2_derivative_x,f2_derivative_y]])
 	
 
 
