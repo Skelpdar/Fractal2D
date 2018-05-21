@@ -50,12 +50,12 @@ class Fractal2D:
 
 	def getColor(self, p):
 		root = self.newton(p)
-		c = [4/5,3/5,3/5,1/5]
+		c = [[21/255,101/255,192/255],[1/255,41/255,95/255],[132/255,147/255,36/255],[255/255,179/255,15/255]]
 		if root == None:
 			return np.array([1,1,1])
 		else:
 			index = self.findRootIndex(root[0])
-			return np.array([c[index],0,0])
+			return np.array(c[index])
 	
 	def plot(self, dim, N):
 		im = np.zeros([N,N,3])
