@@ -67,7 +67,7 @@ class Fractal2D:
 			for nx in range(N):
 				im[ny][nx] = self.getColor(np.array([x[nx],y[ny]]))
 		
-		plt.imshow(im, origin = 'lower')
+		plt.imshow(im, origin = 'lower', extent = [-dim,dim,-dim,dim])
 		
 	
 	def simplifiedNewton(self, p):
