@@ -7,11 +7,13 @@ class Fractal2D:
 	zeroes = []
 	colours = []
 
-	def __init__(self, function, derivative = None, maxIterations = 100, tolerance = 10E-4):
+	def __init__(self, function, derivative = None, maxIterations = 100, tolerance = 10E-4,
+			  simplified = False):
 		self.function = function
 		self.derivative = derivative
 		self.maxIterations = maxIterations
 		self.tolerance = tolerance
+		self.simplified = simplified
 
 	#How a functioned could be written in order for automated derivation to work.
 	#def f(x,y):
@@ -27,7 +29,7 @@ class Fractal2D:
 	def newton(self, p):
 		#Should return the coordinate of the root and the number of iterations it took.
 		#return None on failure to find root?	
-		for n in range (self.maxIterations):
+		for n in range (1, self.maxIterations):
 			try:
 				p = np.linalg.solve(self.derivative(p), -self.function(p)) + p
 				if np.linalg.norm(self.function(p)) < self.tolerance:
@@ -50,20 +52,24 @@ class Fractal2D:
 			return len(self.zeroes)-1	
 
 	def getColor(self, p):
-		root = self.newton(p)
-		c = [[0/255,150/255,255/255],[255/255,255/255,0/255]]
-		if root == None:
-			return np.array([1,1,1])
-		else:
-			index = self.findRootIndex(root[0])
-			return np.array(c[index]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.5)  
+			if not self.simplified:
+				root = self.newton(p)
+			else:
+				root = self.simplifiedNewton(p)
+			
+			#c = [[21/255,101/255,192/255],[253/255,229/255,1/255]]
+			if root == None:
+				return np.array([1,1,1])
+			else:
+				index = self.findRootIndex(root[0])
+				return np.array(self.colours[index]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.5) 
 	
 	def plot(self, a,b,c,d,N,M):
 		im = np.zeros([M,N,3])
 
 		x = np.linspace(a,b,N)
 		y = np.linspace(c,d,M)
-
+		
 		for ny in range(M):
 			for nx in range(N):
 				im[ny][nx] = self.getColor(np.array([x[nx],y[ny]]))
@@ -92,7 +98,14 @@ class Fractal2D:
 	
 	def simplifiedNewton(self, p):
 		#Newtons method but with numericalDerivativ
-		pass
+		Jackinv = np.linalg.inv(self.derivative(p))
+		for n in range(1,self.maxIterations):
+			try:
+				p = np.matmul(-Jackinv,self.function(p)) + p
+				if np.linalg.norm(self.function(p)) < self.tolerance:
+					return (p,n)
+			except:
+				return None
 
 	def numericalDerivative(self, p, stepDistance=0.001):
 		#The function needs to have two inputs for this to work.        
