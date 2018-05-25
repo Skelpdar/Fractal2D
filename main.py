@@ -19,12 +19,17 @@ def J(p):
     y = p[1]
     return np.array([[3*x**2-3*y**2,-6*x*y],[6*x*y,3*x**2-2*y]])
 
+<<<<<<< HEAD
 fractal = Fractal2D.Fractal2D(F, None, maxIterations = 10, tolerance = 10e-4)
+=======
+fractal = Fractal2D.Fractal2D(F, J, maxIterations = 1000, tolerance = 10e-6)
+>>>>>>> 5fe79b3a7eb00a74a6565a10420577144bc6c120
 
 #Finds a root
 print(fractal.newton(np.array([1,1])))
 
 #Examples for the findRootIndex
+"""
 print(fractal.zeroes)
 fractal.findRootIndex(np.array([1,2]))
 print(fractal.zeroes)
@@ -33,9 +38,13 @@ print(fractal.zeroes)
 #This one wont add a new element, because it is close to the previous root
 fractal.findRootIndex(np.array([1,3.000001]))
 print(fractal.zeroes)
+<<<<<<< HEAD
 
 """
 p = np.array([[1],[2]])
 print(fractal.numericalDerivative(p))
 """
 print(fractal.automatedDeriv())
+=======
+"""
+>>>>>>> 5fe79b3a7eb00a74a6565a10420577144bc6c120

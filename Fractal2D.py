@@ -51,24 +51,25 @@ class Fractal2D:
 
 	def getColor(self, p):
 		root = self.newton(p)
-		c = [[21/255,101/255,192/255],[253/255,229/255,1/255]]
+		c = [[0/255,150/255,255/255],[255/255,255/255,0/255]]
 		if root == None:
 			return np.array([1,1,1])
 		else:
 			index = self.findRootIndex(root[0])
-			return np.array(c[index]) * np.log(root[1])/np.log(self.maxIterations)  
+			return np.array(c[index]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.5)  
 	
-	def plot(self, dim, N):
-		im = np.zeros([N,N,3])
+	def plot(self, a,b,c,d,N,M):
+		im = np.zeros([M,N,3])
 
-		x = np.linspace(-dim,dim,N)
-		y = np.linspace(-dim,dim,N)
+		x = np.linspace(a,b,N)
+		y = np.linspace(c,d,M)
 
-		for ny in range(N):
+		for ny in range(M):
 			for nx in range(N):
 				im[ny][nx] = self.getColor(np.array([x[nx],y[ny]]))
 		
-		plt.imshow(im, origin = 'lower', extent = [-dim,dim,-dim,dim])
+		#plt.imshow(im, origin = 'lower', extent = [-dim,dim,-dim,dim])
+		plt.imsave('fractal.png',im, origin = 'lower')
 		
 	def plot2(self, N, a, b, c, d):
 		xvalues = np.linspace(a, b, N)
