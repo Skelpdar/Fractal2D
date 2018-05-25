@@ -18,10 +18,10 @@ class Fractal2D:
 	#return Array([[x**3-3*x*y**2-1],[3*x**2*y-y**2]])	
 	def automatedDeriv(self):
 		x, y = symbols('x y')        
-		a = f1_derivative_x = diff(self.function[0],x)  
-		b = f1_derivative_y = diff(self.function[0],y)
-		c = f2_derivative_x = diff(self.function[1],x) 
-		d = f2_derivative_y = diff(self.function[1],y)		 
+		a = f1_derivative_x = diff(self.function(x,y)[0],x)  
+		b = f1_derivative_y = diff(self.function(x,y)[0],y)
+		c = f2_derivative_x = diff(self.function(x,y)[1],x) 
+		d = f2_derivative_y = diff(self.function(x,y)[1],y)		 
 		return np.array([[a,b],[c,d]])
     
 	def newton(self, p):
@@ -93,7 +93,7 @@ class Fractal2D:
 		#Newtons method but with numericalDerivativ
 		pass
 
-	def numericalDerivative(self, p, stepDistance):
+	def numericalDerivative(self, p, stepDistance=0.001):
 		#The function needs to have two inputs for this to work.        
 		h = stepDistance
 		f1x_ad_h = self.function(p[0]+h,p[1])[0]
