@@ -17,6 +17,7 @@ class Fractal2D:
 		self.tolerance = tolerance
 		self.simplified = simplified
 
+	#Erik
 	#How a functioned could be written in order for automated derivation to work.
 	#def f(x,y):
 	#return Array([[x**3-3*x*y**2-1],[3*x**2*y-y**2]])	
@@ -28,6 +29,7 @@ class Fractal2D:
 		d = f2_derivative_y = diff(self.function(x,y)[1],y)		 
 		return np.array([[a,b],[c,d]])
     
+	#Erik
 	def newton(self, p):
 		#Should return the coordinate of the root and the number of iterations it took.
 		#return None on failure to find root?	
@@ -78,7 +80,8 @@ class Fractal2D:
 		
 		#plt.imshow(im, origin = 'lower', extent = [-dim,dim,-dim,dim])
 		plt.imsave('fractal.png',im, origin = 'lower')
-		
+	
+	#Jonatan	
 	def plot2(self, N, a, b, c, d):
 		xvalues = np.linspace(a, b, N)
 		yvalues = np.linspace(c, d, N)
@@ -98,6 +101,7 @@ class Fractal2D:
 		#plt.pcolor(A)
 		plt.pcolor(G[0])
 	
+	#Harald, Erik
 	def simplifiedNewton(self, p):
 		#Newtons method but with numericalDerivativ
 		Jackinv = np.linalg.inv(self.derivative(p))
