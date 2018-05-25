@@ -56,7 +56,7 @@ class Fractal2D:
 			return np.array([1,1,1])
 		else:
 			index = self.findRootIndex(root[0])
-			return np.array(c[index]) * np.log(root[1])/np.log(self.maxIterations)  
+			return np.array(c[index]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.5)  
 	
 	def plot(self, dim, N):
 		im = np.zeros([N,N,3])
@@ -68,7 +68,8 @@ class Fractal2D:
 			for nx in range(N):
 				im[ny][nx] = self.getColor(np.array([x[nx],y[ny]]))
 		
-		plt.imshow(im, origin = 'lower', extent = [-dim,dim,-dim,dim])
+		#plt.imshow(im, origin = 'lower', extent = [-dim,dim,-dim,dim])
+		plt.imsave('fractal.png',im, origin = 'lower')
 		
 	def plot2(self, N, a, b, c, d):
 		xvalues = np.linspace(a, b, N)
