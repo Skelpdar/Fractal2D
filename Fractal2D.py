@@ -78,7 +78,7 @@ class Fractal2D:
 			for nx in range(N):
 				im[ny][nx] = self.getColor(np.array([x[nx],y[ny]]))
 		
-		#plt.imshow(im, origin = 'lower', extent = [-dim,dim,-dim,dim])
+		#plt.imshow(im, origin = 'lower', extent = [a,b,c,d])
 		plt.imsave('fractal.png',im, origin = 'lower')
 	
 	#Jonatan	
