@@ -2,11 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sympy import symbols, diff, Array
 
-#%%
-
 class Fractal2D:
 	
+	#Contains all roots found so far
 	zeroes = []
+	
+	#Determines which colour each root should have
 	colours = []
 
 	def __init__(self, function, derivative = None, maxIterations = 100, tolerance = 10E-4,
@@ -17,7 +18,7 @@ class Fractal2D:
 		self.tolerance = tolerance
 		self.simplified = simplified
 
-	#Erik
+	#Erik C
 	#How a functioned could be written in order for automated derivation to work.
 	#def f(x,y):
 	#return Array([[x**3-3*x*y**2-1],[3*x**2*y-y**2]])	
@@ -29,10 +30,12 @@ class Fractal2D:
 		d = f2_derivative_y = diff(self.function(x,y)[1],y)		 
 		return np.array([[a,b],[c,d]])
     
-	#Erik
+	#Erik W
 	def newton(self, p):
-		#Should return the coordinate of the root and the number of iterations it took.
-		#return None on failure to find root?	
+		"""
+		Takes a 2D-vector p and finds a root using Newton's method.
+		Returns a 2D-vector on convergence, and None on divergence.
+		"""
 		for n in range (1, self.maxIterations):
 			try:
 				p = np.linalg.solve(self.derivative(p), -self.function(p)) + p
@@ -42,9 +45,12 @@ class Fractal2D:
 				return None
 		return None
 	
+	#Erik W
 	def findRootIndex(self, root):
-		#Should return the index in 'zeroes' of the root, 
-		#or an already present one within the given tolerance.
+		"""
+		Returns the index in zeroes of the point root, if it hasn't been found yet
+		add root to zeroes.
+		"""
 		
 		#Check if the difference to some existing root is smaller than the tolerance.
 		for index in range(len(self.zeroes)):
@@ -54,7 +60,8 @@ class Fractal2D:
 		else:
 			self.zeroes.append(root)
 			return len(self.zeroes)-1	
-
+	
+	#Viktor, Erik W
 	def getColor(self, p):
 			if not self.simplified:
 				root = self.newton(p)
@@ -68,6 +75,7 @@ class Fractal2D:
 				index = self.findRootIndex(root[0])
 				return np.array(self.colours[index]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.5) 
 	
+	#Viktor, Erik W
 	def plot(self, a,b,c,d,N,M):
 		im = np.zeros([M,N,3])
 
@@ -81,7 +89,7 @@ class Fractal2D:
 		#plt.imshow(im, origin = 'lower', extent = [a,b,c,d])
 		plt.imsave('fractal.png',im, origin = 'lower')
 	
-	#Jonatan	
+	#Jonathan	
 	def plot2(self, N, a, b, c, d):
 		xvalues = np.linspace(a, b, N)
 		yvalues = np.linspace(c, d, N)
@@ -101,7 +109,7 @@ class Fractal2D:
 		#plt.pcolor(A)
 		plt.pcolor(G[0])
 	
-	#Harald, Erik
+	#Harald, Erik W
 	def simplifiedNewton(self, p):
 		#Newtons method but with numericalDerivativ
 		Jackinv = np.linalg.inv(self.derivative(p))
@@ -112,7 +120,8 @@ class Fractal2D:
 					return (p,n)
 			except:
 				return None
-
+	
+	#Erik C
 	def numericalDerivative(self, p, stepDistance=0.001):
 		#The function needs to have two inputs for this to work.        
 		h = stepDistance
