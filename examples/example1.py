@@ -2,6 +2,7 @@ import Fractal2D
 import numpy as np
 from sympy import *
 
+np.seterr(all = 'raise')
 
 #Defines the function
 def F(p):
@@ -28,6 +29,11 @@ for fan in range(1,10000):
 
 
 
-fractal = Fractal2D.Fractal2D(F, J, maxIterations = 500, tolerance = 10e-4, simplified = True)
+fractal = Fractal2D.Fractal2D(F, J, maxIterations = 500, tolerance = 10e-4, simplified = False)
 
 fractal.colours = colours
+
+fractal.colours[0] = [83/255,118/255,20/255]
+fractal.colours[1] = [65/255,124/255,129/255]
+
+fractal.plot(-2,2,-2,2,800,800)

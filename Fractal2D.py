@@ -73,7 +73,7 @@ class Fractal2D:
 				return np.array([1,1,1])
 			else:
 				index = self.findRootIndex(root[0])
-				return np.array(self.colours[index]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.5) 
+				return np.array(self.colours[index]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.95) 
 	
 	#Viktor, Erik W
 	def plot(self, a,b,c,d,N,M):
@@ -83,6 +83,10 @@ class Fractal2D:
 		y = np.linspace(c,d,M)
 		
 		for ny in range(M):
+			#print progress
+			if ny % 10 == 0:
+				print(ny)
+		
 			for nx in range(N):
 				im[ny][nx] = self.getColor(np.array([x[nx],y[ny]]))
 		
