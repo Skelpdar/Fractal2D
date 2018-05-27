@@ -98,6 +98,13 @@ class Fractal2D:
 	
 	#Jonathan	
 	def plot2(self, N, a, b, c, d):
+		"""
+		This is a plot function containing the commands meshgrid and pcolor 
+		which was suggested i task 4. Later we improved this and did not use 
+		either of the commands. What u see in # is an example of creating a 
+		totally new matrix. What we are doing now is changing the elements 
+		in one of the matrices in the meshgrid. 
+		"""
 		xvalues = np.linspace(a, b, N)
 		yvalues = np.linspace(c, d, N)
 		G = np.meshgrid(xvalues, yvalues)
@@ -111,10 +118,11 @@ class Fractal2D:
 					G[0][n][i] = 5
 				else:
 					#row.append(self.findRootIndex(root[0]))
-					G[0][n][i] = self.findRootIndex(root[0])
+					G[0][n][i] = self.findRootIndex(root[0]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.95)
 		#vstack(A)
 		#plt.pcolor(A)
 		plt.pcolor(G[0])
+		plt.savefig('fractal2.png')
 	
 	#Harald, Erik W
 	def simplifiedNewton(self, p):
