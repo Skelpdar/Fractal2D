@@ -18,16 +18,17 @@ class Fractal2D:
 		self.tolerance = tolerance
 		self.simplified = simplified
 
-	#Erik C
-	#How a functioned could be written in order for automated derivation to work.
-	#def f(x,y):
-	#return Array([[x**3-3*x*y**2-1],[3*x**2*y-y**2]])	
+	#Erik C		
 	def automatedDeriv(self):
+		"""
+		With the class initialized with a 2D Array-function,this method
+		returns its jacobian matrix.
+		"""
 		x, y = symbols('x y')        
-		a = f1_derivative_x = diff(self.function(x,y)[0],x)  
-		b = f1_derivative_y = diff(self.function(x,y)[0],y)
-		c = f2_derivative_x = diff(self.function(x,y)[1],x) 
-		d = f2_derivative_y = diff(self.function(x,y)[1],y)		 
+		a = diff(self.function(x,y)[0],x) #f1_derivative_x  
+		b = diff(self.function(x,y)[0],y) #f1_derivative_y
+		c = diff(self.function(x,y)[1],x) #f2_derivative_x 
+		d = diff(self.function(x,y)[1],y) #f2_derivative_y		 
 		return np.array([[a,b],[c,d]])
     
 	#Erik W
@@ -127,7 +128,11 @@ class Fractal2D:
 	
 	#Erik C
 	def numericalDerivative(self, p, stepDistance=0.001):
-		#The function needs to have two inputs for this to work.        
+		"""
+		Four numerical partial derivatives are evaluated at
+		the given vector p. These are returned in a jacobian
+		matrix of the function initialized in this class.
+		"""        
 		h = stepDistance
 		f1x_ad_h = self.function(p[0]+h,p[1])[0]
 		f1x_sub_h = self.function(p[0]-h,p[1])[0]
