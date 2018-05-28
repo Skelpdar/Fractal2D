@@ -31,7 +31,7 @@ class Fractal2D:
 		d = diff(self.function(x,y)[1],y) #f2_derivative_y		 
 		return np.array([[a,b],[c,d]])
     
-	#Erik W
+	#Erik W, Erik C
 	def newton(self, p):
 		"""
 		Takes a 2D-vector p and finds a root using Newton's method.
@@ -138,7 +138,7 @@ class Fractal2D:
 			except:
 				return None
 	
-	#Erik C
+	#Erik C, Erik W
 	def numericalDerivative(self, p):
 		"""
 		Four numerical partial derivatives are evaluated at
