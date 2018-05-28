@@ -120,11 +120,11 @@ class Fractal2D:
 					G[0][n][i] = 5
 				else:
 					#row.append(self.findRootIndex(root[0]))
-					G[0][n][i] = self.findRootIndex(root[0]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.95)
+					G[0][n][i] = (1 + self.findRootIndex(root[0])) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.95)
 		#vstack(A)
 		#plt.pcolor(A)
 		plt.pcolor(G[0])
-		plt.savefig('{}.png'.format(Filename))
+		plt.savefig('{}.png'.format(Filename), dpi = 1200)
 	
 	#Harald, Erik W, Jonathan
 	def simplifiedNewton(self, p):
