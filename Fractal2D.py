@@ -11,14 +11,13 @@ class Fractal2D:
 	colours = []
 
 	#Viktor, Erik W, Alfred, Erik C, Jonathan, Harald, Victor
-	def __init__(self, function, derivative = None, maxIterations = 100, tolerance = 10E-4,
-			  simplified = False):
+	def __init__(self, function, derivative = None, maxIterations = 100, tolerance = 10E-4, simplified = False, stepDistance = 0.001):
 		self.function = function
 		self.derivative = derivative
 		self.maxIterations = maxIterations
 		self.tolerance = tolerance
 		self.simplified = simplified
-
+		self.stepDistance = stepDistance
 	#Erik C		
 	def automatedDeriv(self):
 		"""
@@ -140,13 +139,13 @@ class Fractal2D:
 				return None
 	
 	#Erik C
-	def numericalDerivative(self, p, stepDistance=0.001):
+	def numericalDerivative(self, p):
 		"""
 		Four numerical partial derivatives are evaluated at
 		the given vector p. These are returned in a jacobian
 		matrix of the function initialized in this class.
 		"""        
-		h = stepDistance
+		h = self.stepDistance
 		f1x_ad_h = self.function(p + np.array([h,0]))[0]
 		f1x_sub_h = self.function(p + np.array([-h,0]))[0]
 		f1y_ad_h = self.function(p + np.array([0,h]))[0]
