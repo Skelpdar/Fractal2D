@@ -69,17 +69,23 @@ class Fractal2D:
 	
 	#Viktor, Erik W
 	def getColor(self, p):
-			if not self.simplified:
-				root = self.newton(p)
-			else:
-				root = self.simplifiedNewton(p)
+		"""
+		Fetches the nearest root using the newtons method for a specific 
+		coordinate and assigns it a color using the findRootIndex. Then 
+		shades the color depending on the number of iteration sit took to
+		find the root.
+		"""
+		if not self.simplified:
+			root = self.newton(p)
+		else:
+			root = self.simplifiedNewton(p)
 			
-			#c = [[21/255,101/255,192/255],[253/255,229/255,1/255]]
-			if root == None:
-				return np.array([1,1,1])
-			else:
-				index = self.findRootIndex(root[0])
-				return np.array(self.colours[index]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.95) 
+		#c = [[21/255,101/255,192/255],[253/255,229/255,1/255]]
+		if root == None:
+			return np.array([1,1,1])
+		else:
+			index = self.findRootIndex(root[0])
+			return np.array(self.colours[index]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.95) 
 	
 	#Viktor, Erik W, Alfred
 	def plot(self, a,b,c,d,N,M,Filename = 'fractal'):
