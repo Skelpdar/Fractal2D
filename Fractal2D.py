@@ -32,7 +32,7 @@ class Fractal2D:
 		return np.array([[a,b],[c,d]])
     
 
-	#Erik W, Jonathan
+	#Erik W, Jonathan, Erik C
 	def newton(self, p):
 		"""
 		Takes a 2D-vector p and finds a root using Newton's method.
