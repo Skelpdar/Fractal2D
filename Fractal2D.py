@@ -79,7 +79,7 @@ class Fractal2D:
 				return np.array(self.colours[index]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.95) 
 	
 	#Viktor, Erik W
-	def plot(self, a,b,c,d,N,M):
+	def plot(self, a,b,c,d,N,M,Filename = 'fractal'):
 		im = np.zeros([M,N,3])
 
 		x = np.linspace(a,b,N)
@@ -94,10 +94,10 @@ class Fractal2D:
 				im[ny][nx] = self.getColor(np.array([x[nx],y[ny]]))
 		
 		#plt.imshow(im, origin = 'lower', extent = [a,b,c,d])
-		plt.imsave('fractal.png',im, origin = 'lower')
+		plt.imsave('{}.png'.format(Filename),im, origin = 'lower')
 	
 	#Jonathan	
-	def plot2(self, N, a, b, c, d):
+	def plot2(self, N, a, b, c, d,Filename = 'fractal2'):
 		"""
 		This is a plot function containing the commands meshgrid and pcolor 
 		which was suggested i task 4. Later we improved this and did not use 
@@ -122,7 +122,7 @@ class Fractal2D:
 		#vstack(A)
 		#plt.pcolor(A)
 		plt.pcolor(G[0])
-		plt.savefig('fractal2.png')
+		plt.savefig('{}.png'.format(Filename))
 	
 	#Harald, Erik W
 	def simplifiedNewton(self, p):
