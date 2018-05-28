@@ -41,4 +41,4 @@ print(fractal.derivative(p))
 
 print(fractal.numericalDerivative(p))
 
-#fractal.plot(-2,2,-2,2,800,800)
+fractal.plot(-2,2,-2,2,400,400)
