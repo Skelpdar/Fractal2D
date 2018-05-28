@@ -99,7 +99,7 @@ class Fractal2D:
 		plt.imsave('{}.png'.format(Filename),im, origin = 'lower')
 	
 	#Jonathan	, Alfred
-	def plot2(self, N, a, b, c, d,Filename = 'fractal2'):
+	def plot2(self, N, M, a, b, c, d,Filename = 'fractal2'):
 		"""
 		This is a plot function containing the commands meshgrid and pcolor 
 		which was suggested i task 4. Later we improved this and did not use 
@@ -107,13 +107,13 @@ class Fractal2D:
 		totally new matrix. What we are doing now is changing the elements 
 		in one of the matrices in the meshgrid. 
 		"""
-		xvalues = np.linspace(a, b, N)
+		xvalues = np.linspace(a, b, M)
 		yvalues = np.linspace(c, d, N)
 		G = np.meshgrid(xvalues, yvalues)
 		#A = []
 		for n in range(N):
 			#row = []
-			for i in range(N):
+			for i in range(M):
 				root = self.newton(np.array([G[0][n][i], G[1][n][i]]))
 				if root == None:
 					#row.append(5)
