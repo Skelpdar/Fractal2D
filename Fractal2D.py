@@ -10,6 +10,7 @@ class Fractal2D:
 	#Determines which colour each root should have
 	colours = []
 
+	#Viktor, Erik W, Alfred, Erik C, Jonathan, Harald, Victor
 	def __init__(self, function, derivative = None, maxIterations = 100, tolerance = 10E-4,
 			  simplified = False):
 		self.function = function
@@ -43,13 +44,14 @@ class Fractal2D:
 					p = np.linalg.solve(self.numericalDerivative(p), -self.function(p)) + p
 				else:
 					p = np.linalg.solve(self.derivative(p), -self.function(p)) + p
+				
 				if np.linalg.norm(self.function(p)) < self.tolerance:
 					return (p,n)
 			except:
 				return None
 		return None
 	
-	#Erik W
+	#Erik W, Harald
 	def findRootIndex(self, root):
 		"""
 		Returns the index in zeroes of the point root, if it hasn't been found yet
@@ -79,7 +81,7 @@ class Fractal2D:
 				index = self.findRootIndex(root[0])
 				return np.array(self.colours[index]) * (1 - np.log(root[1])/np.log(self.maxIterations) * 0.95) 
 	
-	#Viktor, Erik W
+	#Viktor, Erik W, Alfred
 	def plot(self, a,b,c,d,N,M,Filename = 'fractal'):
 		im = np.zeros([M,N,3])
 
@@ -97,7 +99,7 @@ class Fractal2D:
 		#plt.imshow(im, origin = 'lower', extent = [a,b,c,d])
 		plt.imsave('{}.png'.format(Filename),im, origin = 'lower')
 	
-	#Jonathan	
+	#Jonathan	, Alfred
 	def plot2(self, N, a, b, c, d,Filename = 'fractal2'):
 		"""
 		This is a plot function containing the commands meshgrid and pcolor 
@@ -125,7 +127,7 @@ class Fractal2D:
 		plt.pcolor(G[0])
 		plt.savefig('{}.png'.format(Filename))
 	
-	#Harald, Erik W
+	#Harald, Erik W, Jonathan
 	def simplifiedNewton(self, p):
 		#Newtons method but with numericalDerivativ
 		Jackinv = np.linalg.inv(self.derivative(p))
@@ -145,17 +147,17 @@ class Fractal2D:
 		matrix of the function initialized in this class.
 		"""        
 		h = stepDistance
-		f1x_ad_h = self.function(p[0]+h,p[1])[0]
-		f1x_sub_h = self.function(p[0]-h,p[1])[0]
-		f1y_ad_h = self.function(p[0],p[1]+h)[0]
-		f1y_sub_h = self.function(p[0],p[1]-h)[0]
+		f1x_ad_h = self.function(p + np.array([h,0]))[0]
+		f1x_sub_h = self.function(p + np.array([-h,0]))[0]
+		f1y_ad_h = self.function(p + np.array([0,h]))[0]
+		f1y_sub_h = self.function(p + np.array([0,-h]))[0]
 		f1_derivative_x = (f1x_ad_h-f1x_sub_h)/(2*h) 
 		f1_derivative_y = (f1y_ad_h-f1y_sub_h)/(2*h)   
 		
-		f2x_ad_h = self.function(p[0]+h,p[1])[1]
-		f2x_sub_h = self.function(p[0]-h,p[1])[1]
-		f2y_ad_h = self.function(p[0],p[1]+h)[1]
-		f2y_sub_h = self.function(p[0],p[1]-h)[1]
+		f2x_ad_h = self.function(p + np.array([h,0]))[1]
+		f2x_sub_h = self.function(p + np.array([-h,0]))[1]
+		f2y_ad_h = self.function(p + np.array([0,h]))[1]
+		f2y_sub_h = self.function(p + np.array([0,-h]))[1]
 		f2_derivative_x = (f2x_ad_h-f2x_sub_h)/(2*h) 
 		f2_derivative_y = (f2y_ad_h-f2y_sub_h)/(2*h)
 		return np.array([[f1_derivative_x,f1_derivative_y],[f2_derivative_x,f2_derivative_y]])

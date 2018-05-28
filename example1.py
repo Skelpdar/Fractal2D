@@ -21,7 +21,7 @@ def F(x,y):
 def J(p):
     x = p[0]
     y = p[1]
-    return np.array([[3*x**2-3*y**2,-6*x*y],[6*x*y,3*x**2-2*y]])
+    return np.array([[3*x**2-3*y**2,-6*x*y],[6*x*y,3*x**2-3*y**2]])
 
 colours = []
 for fan in range(1,10000):
@@ -36,4 +36,9 @@ fractal.colours = colours
 fractal.colours[0] = [83/255,118/255,20/255]
 fractal.colours[1] = [65/255,124/255,129/255]
 
-fractal.plot(-2,2,-2,2,800,800)
+p = np.array([1,1])
+print(fractal.derivative(p))
+
+print(fractal.numericalDerivative(p))
+
+#fractal.plot(-2,2,-2,2,800,800)
