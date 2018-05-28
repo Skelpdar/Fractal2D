@@ -32,7 +32,7 @@ class Fractal2D:
 		d = diff(self.function(x,y)[1],y) #f2_derivative_y		 
 		return np.array([[a,b],[c,d]])
     
-	#Erik W
+	#Erik W, Jonathan
 	def newton(self, p):
 		"""
 		Takes a 2D-vector p and finds a root using Newton's method.
@@ -127,7 +127,7 @@ class Fractal2D:
 		plt.pcolor(G[0])
 		plt.savefig('{}.png'.format(Filename), dpi = 1200)
 	
-	#Harald, Erik W, Jonathan
+	#Harald, Erik W
 	def simplifiedNewton(self, p):
 		#Newtons method but with numericalDerivativ
 		Jackinv = np.linalg.inv(self.derivative(p))
