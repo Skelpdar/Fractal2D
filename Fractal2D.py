@@ -36,12 +36,13 @@ class Fractal2D:
 		"""
 		Takes a 2D-vector p and finds a root using Newton's method.
 		Returns a 2D-vector on convergence, and None on divergence.
-		"""
-		if self.derivative == None:
-			self.derivative = self.numericalDerivative            
+		"""         
 		for n in range (1, self.maxIterations):
 			try:
-				p = np.linalg.solve(self.derivative(p), -self.function(p)) + p
+				if self.derivative == None:
+					p = np.linalg.solve(self.numericalDerivative(p), -self.function(p)) + p
+				else:
+					p = np.linalg.solve(self.derivative(p), -self.function(p)) + p
 				if np.linalg.norm(self.function(p)) < self.tolerance:
 					return (p,n)
 			except:
