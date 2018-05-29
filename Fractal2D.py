@@ -21,7 +21,7 @@ class Fractal2D:
 					self.simplified = simplified
 					self.stepDistance = stepDistance
 			#Erik C		
-			def automatedDeriv(self):
+			def symbolicDerivative(self):
 				"""
 				With the class initialized with a 2D Array-function,this method
 				returns its jacobian matrix.
