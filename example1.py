@@ -24,21 +24,20 @@ def J(p):
     return np.array([[3*x**2-3*y**2,-6*x*y],[6*x*y,3*x**2-3*y**2]])
 
 colours = []
-for fan in range(1,10000):
+for c in range(1,10000):
 	colours.append([np.random.rand(),np.random.rand(),np.random.rand()])
-
-
 
 fractal = Fractal2D.Fractal2D(F, J, maxIterations = 500, tolerance = 10e-4, simplified = False)
 
 fractal.colours = colours
 
-fractal.colours[0] = [83/255,118/255,20/255]
-fractal.colours[1] = [65/255,124/255,129/255]
+fractal.colours[0] = [217/255,34/255,34/255]
+fractal.colours[1] = [36/255,69/255,145/255]
+fractal.colours[2] = [28/255,174/255,28/255]
 
 p = np.array([1,1])
 print(fractal.derivative(p))
 
 print(fractal.numericalDerivative(p))
 
-fractal.plot(-2,2,-2,2,400,400)
+fractal.plot(-2,2,-1.125,1.125,1280,720)
