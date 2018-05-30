@@ -1,3 +1,12 @@
+"""
+vi3022jo-s@student.lu.se #Viktor Hrannar Jónsson
+al5878la-s@student.lu.se #Alfred Langerbeck
+er5872wa-s@student.lu.se #Erik Wallin
+jo4450pe-s@student.lu.se #Jonathan Petersson
+ha3247oh-s@student.lu.se #Harald Öhrn
+er5046cl-s@student.lu.se #Erik Clarkson
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from sympy import symbols, diff, Array
@@ -95,6 +104,9 @@ class Fractal2D:
 			
 			#Viktor, Erik W, Alfred
 			def plot(self, a,b,c,d,N,M,Filename = 'fractal'):
+				"""
+				Creates a three layered matrix and goes through each element, using getColor to color that specific element.
+				"""
 				im = np.zeros([M,N,3])
 		
 				x = np.linspace(a,b,N)
@@ -141,7 +153,9 @@ class Fractal2D:
 			
 			#Harald, Erik W
 			def simplifiedNewton(self, p):
-				#Newtons method but with numericalDerivativ
+				"""
+				Newtons method but with numericalDerivativ
+				"""
 				try:
 					Jackinv = np.linalg.inv(self.derivative(p))
 					for n in range(1,self.maxIterations):
@@ -153,6 +167,7 @@ class Fractal2D:
 							return None
 				except np.LinAlgError:
 					print('p is a singular matrix, SimplfiedNewton will not work!')
+					
 			#Erik C, Erik W
 			def numericalDerivative(self, p):
 				"""
