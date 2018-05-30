@@ -124,7 +124,7 @@ class Fractal2D:
 				plt.imsave('{}.png'.format(Filename),im, origin = 'lower')
 			
 			#Jonathan	, Alfred
-			def plot2(self, N, M, a, b, c, d,Filename = 'fractal2'):
+			def plot2(self, a, b, c, d, N, M, Filename = 'fractal2'):
 				"""
 				This is a plot function containing the commands meshgrid and pcolor 
 				which was suggested i task 4. Later we improved this and did not use 
